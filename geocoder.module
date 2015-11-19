@@ -9,10 +9,9 @@
  *   The determined geocode if geocoding was successful, NULL otherwise.
  */
 function geocoder_geocode($searchstring) {
-  $adapter = new \Geocoder\HttpAdapter\GuzzleHttpAdapter();
   $geocoder = new \Geocoder\Geocoder();
-  $map_provider_class = \Drupal::config('geocoder.google')->get('map_provider_class');
-  $geocoder->registerProvider(new $map_provider_class($adapter));
+  $provider = \Drupal::service('geocoder.provider');
+  $geocoder->registerProvider($provider);
 
   try {
     $geocode = $geocoder->geocode($searchstring);
