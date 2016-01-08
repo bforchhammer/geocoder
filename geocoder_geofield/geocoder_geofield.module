@@ -333,5 +333,5 @@ function geocoder_geofield_format_addressfield($addresses) {
  *   A search string for geocoding.
  */
 function geocoder_geofield_format_textfield($text) {
-  return $text;
+  return $text[0]['value'];
 }
