@@ -5,7 +5,6 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "require": {
-        "willdurand/geocoder": "~2.7",
-        "guzzle/guzzle": "~3.8"
+        "willdurand/geocoder": "^3.3"
     }
 }

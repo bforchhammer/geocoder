@@ -1,6 +1,7 @@
 services:
   geocoder.http_adapter:
-    class: Geocoder\HttpAdapter\GuzzleHttpAdapter
+    class: Ivory\HttpAdapter\Guzzle5HttpAdapter
+    arguments: ['@http_client']
   geocoder.provider:
-    class: Geocoder\Provider\GoogleMapsProvider
+    class: Geocoder\Provider\GoogleMaps
     arguments: ['@geocoder.http_adapter']

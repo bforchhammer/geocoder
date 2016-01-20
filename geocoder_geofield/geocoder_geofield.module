@@ -155,12 +155,12 @@ function geocoder_geofield_geocoder_value_callback(\Drupal\Core\Field\WidgetInte
 }
 
 /**
- * @param \Geocoder\Result\ResultInterface $geocode
+ * @param \Geocoder\Model\Address $geocode
  *   The new geocode.
  * @return string
  *   WKT formatted string.
  */
-function geocoder_geofield_wkt_value(\Geocoder\Result\ResultInterface $geocode) {
+function geocoder_geofield_wkt_value(\Geocoder\Model\Address $geocode) {
   return \Drupal::service('geofield.wkt_generator')
     ->WktBuildPoint(array(
       $geocode->getLongitude(),
@@ -169,12 +169,12 @@ function geocoder_geofield_wkt_value(\Geocoder\Result\ResultInterface $geocode) 
 }
 
 /**
- * @param \Geocoder\Result\ResultInterface $geocode
+ * @param \Geocoder\Model\Address $geocode
  *   The new geocode.
  * @return array
  *   Array of coordinate values, keyed by lat and lon.
  */
-function geocoder_geofield_lat_lon_value(\Geocoder\Result\ResultInterface $geocode) {
+function geocoder_geofield_lat_lon_value(\Geocoder\Model\Address $geocode) {
   return array(
     'lon' => $geocode->getLongitude(),
     'lat' => $geocode->getLatitude(),
@@ -182,13 +182,13 @@ function geocoder_geofield_lat_lon_value(\Geocoder\Result\ResultInterface $geoco
 }
 
 /**
- * @param \Geocoder\Result\ResultInterface $geocode
+ * @param \Geocoder\Model\Address $geocode
  *   The new geocode.
  * @return array|string
  *   Array of bounds, keyed by top, bottom, left and right.
  */
-function geocoder_geofield_bounds_value(\Geocoder\Result\ResultInterface $geocode) {
-  $bounds = $geocode->getBounds();
+function geocoder_geofield_bounds_value(\Geocoder\Model\Address $geocode) {
+  $bounds = $geocode->getBounds()->toArray();
   return array(
     'top' => $bounds['south'],
     'bottom' => $bounds['bottom'],

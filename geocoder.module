@@ -5,17 +5,16 @@
  *
  * @param $searchstring
  *   A string representing a location to be geocoded, e.g. an address.
- * @return \Geocoder\Result\ResultInterface|\Geocoder\ResultInterface|NULL
+ *
+ * @return \Geocoder\Model\Address|NULL
  *   The determined geocode if geocoding was successful, NULL otherwise.
  */
 function geocoder_geocode($searchstring) {
-  $geocoder = new \Geocoder\Geocoder();
-  $provider = \Drupal::service('geocoder.provider');
-  $geocoder->registerProvider($provider);
-
+  $geocoder = \Drupal::service('geocoder.provider');
   try {
+    /** @var \Geocoder\Model\AddressCollection $geocode */
     $geocode = $geocoder->geocode($searchstring);
-    return $geocode;
+    return $geocode->first();
   } catch (Exception $e) {
     watchdog_exception('geocoder', $e);
   }
